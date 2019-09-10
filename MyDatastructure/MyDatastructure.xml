@@ -4,14 +4,15 @@
         <name>MyDatastructure</name>
     </assembly>
     <members>
-        <member name="T:MyDatastructure.Maps.IMap`2">
+      <member name="T:MyDatastructure.Maps.IMap`2">
             <summary>
             An interface for my own set implementation.
             <para>
             Whether it handles null key depends on implementations. 
             </para>
             </summary>
-        </member>
+        </membe>
+        
         <member name="P:MyDatastructure.Maps.IMap`2.Item(`0)">
             <summary>
             No such key excpetion!
