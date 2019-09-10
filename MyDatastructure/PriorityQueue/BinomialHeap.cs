@@ -38,17 +38,33 @@ namespace MyDatastructure.PriorityQueue
 
     public class BNode<T> where T : IComparable<T>
     {
-        int Rank;
         T Data;
-        BNode<T>[] Children;
+        /// <summary>
+        /// Visiting Children at that level. 
+        /// </summary>
+        BNode<T> LeftChild;
+        /// <summary>
+        /// Go down in the level of the Binomial Tree. 
+        /// </summary>
+        BNode<T> RightChild;
 
-        public BNode(int Rank, T Data)
+        public BNode(BNode<T> l, BNode<T> r)
         {
-            if (Rank < 0 || object.ReferenceEquals(Data, null))
-                throw new Exception();
-            Children = Rank == 0? null : new BNode<T>[Rank] ;
+            LeftChild = l;
+            RightChild = r;
         }
+    }
 
+    public class HatinaryTree<T> where T : IComparable<T>
+    {
+        /// <summary>
+        /// Root of an ordinary binary tree. 
+        /// </summary>
+        BNode<T> Root;
+        /// <summary>
+        /// The smallest element, top node of the binomial tree. 
+        /// </summary>
+        BNode<T> Hat;
 
     }
 

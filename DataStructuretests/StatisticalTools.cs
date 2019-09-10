@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 namespace DataStructureTests.StatisticalTools
 {
@@ -119,5 +120,6 @@ namespace DataStructureTests.StatisticalTools
             SysStopwatch.Reset();
             return thetime;
         }
+        
     }
 }
