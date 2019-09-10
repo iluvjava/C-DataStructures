@@ -36,8 +36,9 @@ namespace MyDatastructure.PriorityQueue
     }
 
 
-    public class BNode<T> where T : IComparable<T>
+    public class BNode<T>
     {
+        
         T Data;
         /// <summary>
         /// Visiting Children at that level. 
@@ -48,8 +49,9 @@ namespace MyDatastructure.PriorityQueue
         /// </summary>
         BNode<T> RightChild;
 
-        public BNode(BNode<T> l, BNode<T> r)
+        public BNode(T data, BNode<T> l = null, BNode<T> r = null)
         {
+            Data = data;
             LeftChild = l;
             RightChild = r;
         }
@@ -65,6 +67,37 @@ namespace MyDatastructure.PriorityQueue
         /// The smallest element, top node of the binomial tree. 
         /// </summary>
         BNode<T> Hat;
+
+        /// <summary>
+        /// Represents the rank of the binomial tree. 
+        /// </summary>
+        int Rank;
+
+
+        /// <summary>
+        /// Construct B_0 Binomial tree. 
+        /// </summary>
+        /// <param name="data"></param>
+        public HatinaryTree(T data)
+        {
+            Rank = 0;
+            Hat = new BNode<T>(data);
+        }
+
+        /// <summary>
+        /// Merging 2 tree with the same rank
+        /// <exception>
+        /// Can not merge tree with 2 different rank.
+        /// </exception>
+        /// </summary>
+        public void Merger(HatinaryTree<T> t)
+        {
+            if (t.Rank != Rank)
+                throw new Exception("Intenal Error.");
+
+        }
+
+
 
     }
 
