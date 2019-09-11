@@ -300,8 +300,5 @@ namespace MyDatastructure.PriorityQueue
             Percolate(IndexOfRemove);
         }
 
-
-
-
     }
 }

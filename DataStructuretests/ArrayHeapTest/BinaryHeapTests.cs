@@ -16,11 +16,16 @@ namespace DataStructureTests.ArrayHeapTest
 
         [TestCase(100, 100)]
         [TestCase(10000, 100)]
-        public void BinaryHeapBasic(int size, int repetition)
+        [TestCase(10000, 100, PriorityQImplementations.FancierBinaryHeap)]
+        public void BinaryHeapBasic(
+            int size,
+            int repetition,
+            PriorityQImplementations type = PriorityQImplementations.SimpleBinaryHeap
+            )
         {
             for (int j = 1; j <= repetition; j++)
             {
-                IPriorityQ<int> q = new SimpleBinaryHeap<int>();
+                IPriorityQ<int> q = GetInstance<int>(type);
                 int[] randomarr = GetRandomizedIntSequence(size);
                 for (int i = 0; i < randomarr.Length; q.Enqueue(randomarr[i]), i++) ;
                 for (int i = 0;
@@ -220,8 +225,30 @@ namespace DataStructureTests.ArrayHeapTest
                 WriteLine($"The standard Deviation is: " +
                     $"{msw.GetStandardDeviation()} ms");
             }
-
         }
+
+        public static IPriorityQ<T> GetInstance<T>(PriorityQImplementations type)
+            where T : IComparable<T>
+        {
+            switch (type)
+            {
+                case PriorityQImplementations.SimpleBinaryHeap:
+                    return new SimpleBinaryHeap<T>();
+                case PriorityQImplementations.FancierBinaryHeap:
+                    return new FancierBinaryHeap<T>();
+            }
+
+            return null;
+        }
+
+        public enum PriorityQImplementations
+        {
+            SimpleBinaryHeap,
+
+            FancierBinaryHeap,
+        }
+
+
 
 
     }

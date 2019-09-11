@@ -4,15 +4,14 @@
         <name>MyDatastructure</name>
     </assembly>
     <members>
-      <member name="T:MyDatastructure.Maps.IMap`2">
+        <member name="T:MyDatastructure.Maps.IMap`2">
             <summary>
             An interface for my own set implementation.
             <para>
             Whether it handles null key depends on implementations. 
             </para>
             </summary>
-        </membe>
-        
+        </member>
         <member name="P:MyDatastructure.Maps.IMap`2.Item(`0)">
             <summary>
             No such key excpetion!
@@ -100,6 +99,63 @@
              </summary>
              <param name="arg"></param>
              <returns></returns>
+        </member>
+        <member name="T:MyDatastructure.PriorityQueue.FancierBinaryHeap`1">
+            <summary>
+            Simple binary heap that uses a hash map to keep track of the element
+            , supports unique elements. 
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:MyDatastructure.PriorityQueue.FancierBinaryHeap`1.IndexMap">
+            <summary>
+            maps the object to index in the heap array. 
+            </summary>
+        </member>
+        <member name="M:MyDatastructure.PriorityQueue.FancierBinaryHeap`1.Enqueue(`0)">
+            <summary>
+            you cannot add duplicated element to the heap. 
+            </summary>
+            <param name="arg"></param>
+        </member>
+        <member name="F:MyDatastructure.PriorityQueue.BNode`1.LeftChild">
+            <summary>
+            Visiting Children at that level. 
+            </summary>
+        </member>
+        <member name="F:MyDatastructure.PriorityQueue.BNode`1.RightChild">
+            <summary>
+            Go down in the level of the Binomial Tree. 
+            </summary>
+        </member>
+        <member name="F:MyDatastructure.PriorityQueue.HatinaryTree`1.Root">
+            <summary>
+            Root of an ordinary binary tree. 
+            </summary>
+        </member>
+        <member name="F:MyDatastructure.PriorityQueue.HatinaryTree`1.Hat">
+            <summary>
+            The smallest element, top node of the binomial tree. 
+            </summary>
+        </member>
+        <member name="F:MyDatastructure.PriorityQueue.HatinaryTree`1.Rank">
+            <summary>
+            Represents the rank of the binomial tree. 
+            </summary>
+        </member>
+        <member name="M:MyDatastructure.PriorityQueue.HatinaryTree`1.#ctor(`0)">
+            <summary>
+            Construct B_0 Binomial tree. 
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:MyDatastructure.PriorityQueue.HatinaryTree`1.Merger(MyDatastructure.PriorityQueue.HatinaryTree{`0})">
+            <summary>
+            Merging 2 tree with the same rank
+            <exception>
+            Can not merge tree with 2 different rank.
+            </exception>
+            </summary>
         </member>
         <member name="T:MyDatastructure.PriorityQ.IPriorityQ`1">
             <summary>
