@@ -143,6 +143,27 @@
              <param name="arg"></param>
              <returns></returns>
         </member>
+<<<<<<< HEAD
+=======
+        <member name="T:MyDatastructure.PriorityQueue.FancierBinaryHeap`1">
+            <summary>
+            Simple binary heap that uses a hash map to keep track of the element
+            , supports unique elements. 
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:MyDatastructure.PriorityQueue.FancierBinaryHeap`1.IndexMap">
+            <summary>
+            maps the object to index in the heap array. 
+            </summary>
+        </member>
+        <member name="M:MyDatastructure.PriorityQueue.FancierBinaryHeap`1.Enqueue(`0)">
+            <summary>
+            you cannot add duplicated element to the heap. 
+            </summary>
+            <param name="arg"></param>
+        </member>
+>>>>>>> af999740735edf53ca575f9a40938f4cc0b40556
         <member name="F:MyDatastructure.PriorityQueue.BNode`1.LeftChild">
             <summary>
             Visiting Children at that level. 

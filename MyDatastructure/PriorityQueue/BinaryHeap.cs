@@ -333,4 +333,86 @@ namespace MyDatastructure.PriorityQueue
             HeapArray[arg2] = a;
         }
     }
+<<<<<<< HEAD
+=======
+
+    /// <summary>
+    /// Simple binary heap that uses a hash map to keep track of the element
+    /// , supports unique elements. 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    [Obsolete("Never tested yet.")]
+    public class FancierBinaryHeap<T> : SimpleBinaryHeap<T> where T : IComparable<T>
+    {
+        /// <summary>
+        /// maps the object to index in the heap array. 
+        /// </summary>
+        protected IMap<T, int> IndexMap;
+
+        public FancierBinaryHeap() : base()
+        {
+            IndexMap = new SysDefaultMap<T, int>();
+        }
+
+        protected FancierBinaryHeap(T[] arr, int offset, int len) : base(arr, offset, len)
+        {
+
+        }
+
+
+        /// <summary>
+        /// you cannot add duplicated element to the heap. 
+        /// </summary>
+        /// <param name="arg"></param>
+        public void Enqueue(T arg)
+        {
+            if (IsNull(arg))
+                throw new InvalidArgumentException();
+            if (IndexMap.ContainsKey(arg))
+            {
+                throw new InvalidArgumentException();
+            }
+            IndexMap[arg] = ElementCount + 1;
+            base.Enqueue(arg);
+        }
+
+        protected void Swap(int arg1, int arg2)
+        {
+            T a = HeapArray[arg1];
+            T b = HeapArray[arg2];
+            IndexMap[a] = arg2;
+            IndexMap[b] = arg1;
+            base.Swap(arg1, arg2);
+        }
+
+        public void RemoveMin()
+        {
+            if (ElementCount == 0)
+                throw new InvalidOperationException();
+            T Removed = Peek();
+            base.RemoveMin();
+            IndexMap.Remove(Removed);
+        }
+
+
+        public bool Contain(T arg)
+        {
+            return IndexMap.ContainsKey(arg);
+        }
+
+        public void Remove(T arg)
+        {
+            if (!IndexMap.ContainsKey(arg))
+            {
+                throw new InvalidArgumentException();
+            }
+            int IndexOfRemove = IndexMap[arg];
+            Swap(IndexOfRemove, ElementCount);
+            IndexMap.Remove(arg);
+            ElementCount--;
+            Percolate(IndexOfRemove);
+        }
+
+    }
+>>>>>>> af999740735edf53ca575f9a40938f4cc0b40556
 }
