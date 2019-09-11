@@ -6,7 +6,9 @@ A Net. Core Library for C# Datastructure.
 ## Binomial Heap (BinomialHeap.cs)
 - Binomial Heap is an abstract structure, which is actually implemented as 
 HatinaryTree in the program.
-- The children of each tree is ordered in Descending rank: B_0 <= B_1<= B_2...
+- The children of each tree is ordered in **descending rank**: 
+B_0 <= B_1<= B_2... 
+- The values contained by children **is not ordered**. 
 ## Hatinary Tree
 - This tree has 2^N of nodes for height of N, it's meant to represent the 
 abstract structure called "BinomialTree"
@@ -33,14 +35,17 @@ hat, representing the **smallest element** on the top of the Binomial Tree.
   - Given 2 Hatinary Tree, Hat1, Hat2, with hat1node and hat2node, 
   and BinaryTree1, and BinaryTree2 in them. here is the Pseudo code for    
   merging: 
-```
-    Choose the smaller among hat1node and hat2node, make it into hat 
-of the new HatinaryTree. 
-    Choose the smaller among hatnode and make it into the root of the 
-inner Binary Tree such that, the left is the root of the BinaryTree with 
-smaller value. 
-```
- - This codes will enforce the Binomial Invariant. 
+    ```
+        The smaller hat node of the 2 becomes the hat of the new Hatinary tree.
+        The larger hat node's right connects to the inner binary tree with 
+    the larger hatnode, left is the other binary tree. 
+    ```
+ - This codes will enforce the Binomial Invariant.
+ - Uses the symmetry of the operation:
+    ```
+    if this.hatnode.value < that.hatnode.value
+     => this.merge(that) else that.merge(this) 
+    ```
 ### The Node
 - The node is just an ordinary Binary Tree Node. 
 

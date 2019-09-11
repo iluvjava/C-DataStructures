@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MyDatastructure.PriorityQ;
+using MyDatastructure.PriorityQueue;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -25,6 +27,8 @@ namespace MyDatastructure.Sorting
         /// </summary>
         T[] MiddleBody;
 
+        protected IPriorityQ<T> TopMax;
+        protected IPriorityQ<T> BottomMinHeap;
 
 
         /// <summary>
@@ -51,8 +55,9 @@ namespace MyDatastructure.Sorting
         /// </summary>
         public void Compute()
         {
-
+            
         }
+
 
     }
 }

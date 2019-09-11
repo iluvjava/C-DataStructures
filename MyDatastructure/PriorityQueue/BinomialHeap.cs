@@ -1,7 +1,5 @@
 ﻿using MyDatastructure.PriorityQ;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MyDatastructure.PriorityQueue
 {
@@ -35,19 +33,19 @@ namespace MyDatastructure.PriorityQueue
         }
     }
 
-
     public class BNode<T>
     {
-        
-        T Data;
+        public T Data { get; set; }
+
         /// <summary>
-        /// Visiting Children at that level. 
+        /// Visiting Children at that level.
         /// </summary>
-        BNode<T> LeftChild;
+        public BNode<T> LeftChild { get; set; }
+
         /// <summary>
-        /// Go down in the level of the Binomial Tree. 
+        /// Go down in the level of the Binomial Tree.
         /// </summary>
-        BNode<T> RightChild;
+        public BNode<T> RightChild { get; set; }
 
         public BNode(T data, BNode<T> l = null, BNode<T> r = null)
         {
@@ -57,25 +55,29 @@ namespace MyDatastructure.PriorityQueue
         }
     }
 
+    /// <summary>
+    /// A representation of the abstract Binomial tree. 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class HatinaryTree<T> where T : IComparable<T>
     {
         /// <summary>
-        /// Root of an ordinary binary tree. 
+        /// Represents the rank of the binomial tree.
         /// </summary>
-        BNode<T> Root;
-        /// <summary>
-        /// The smallest element, top node of the binomial tree. 
-        /// </summary>
-        BNode<T> Hat;
+        private int Rank;
 
         /// <summary>
-        /// Represents the rank of the binomial tree. 
+        /// The smallest element, top node of the binomial tree.
         /// </summary>
-        int Rank;
-
+        public BNode<T> Hat { get; set; }
 
         /// <summary>
-        /// Construct B_0 Binomial tree. 
+        /// Root of an ordinary binary tree.
+        /// </summary>
+        public BNode<T> Root { get; set; }
+
+        /// <summary>
+        /// Construct B_0 Binomial tree.
         /// </summary>
         /// <param name="data"></param>
         public HatinaryTree(T data)
@@ -85,20 +87,31 @@ namespace MyDatastructure.PriorityQueue
         }
 
         /// <summary>
-        /// Merging 2 tree with the same rank
+        /// Merging 2 tree with the same rank, it merges the root
+        /// of THIS TREE to THE t TREE, which assumes that this hatnode
+        /// is less than that hat node.
         /// <exception>
         /// Can not merge tree with 2 different rank.
         /// </exception>
         /// </summary>
-        public void Merger(HatinaryTree<T> t)
+        public void Merge(HatinaryTree<T> t)
         {
             if (t.Rank != Rank)
                 throw new Exception("Intenal Error.");
-
+            // Check if this hat smaller than that hat, if not, merge that 
+            // with this.
+            if (Hat.Data.CompareTo(t.Hat.Data) > 0)
+            {
+                t.Merge(this);
+                Rank++;
+                return;
+            }
+            // Assume this hat node less than that hat node.
+            BNode<T> NewInnerBinaryTreeNode = t.Hat;
+            NewInnerBinaryTreeNode.RightChild = t.Root;
+            NewInnerBinaryTreeNode.LeftChild = Root;
+            Root = NewInnerBinaryTreeNode;
+            Rank++;
         }
-
-
-
     }
-
 }
