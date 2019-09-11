@@ -4,15 +4,14 @@
         <name>MyDatastructure</name>
     </assembly>
     <members>
-      <member name="T:MyDatastructure.Maps.IMap`2">
+        <member name="T:MyDatastructure.Maps.IMap`2">
             <summary>
             An interface for my own set implementation.
             <para>
             Whether it handles null key depends on implementations. 
             </para>
             </summary>
-        </membe>
-        
+        </member>
         <member name="P:MyDatastructure.Maps.IMap`2.Item(`0)">
             <summary>
             No such key excpetion!
@@ -47,11 +46,42 @@
              <typeparam name="K"></typeparam>
              <typeparam name="V"></typeparam>
         </member>
+        <member name="T:MyDatastructure.PriorityQueue.FancierBinaryHeap`1">
+            <summary>
+            Simple binary heap that uses a hash map to keep track of the element
+            , supports unique elements.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:MyDatastructure.PriorityQueue.FancierBinaryHeap`1.IndexMap">
+            <summary>
+            maps the object to index in the heap array.
+            </summary>
+        </member>
+        <member name="M:MyDatastructure.PriorityQueue.FancierBinaryHeap`1.#ctor(`0[],System.Int32,System.Int32)">
+            <summary>
+            Floyd Build Heap on this.
+            </summary>
+            <param name="arr"></param>
+            <param name="offset"></param>
+            <param name="len"></param>
+        </member>
+        <member name="M:MyDatastructure.PriorityQueue.FancierBinaryHeap`1.Enqueue(`0)">
+            <summary>
+            you cannot add duplicated element to the heap.
+            </summary>
+            <param name="arg"></param>
+        </member>
         <member name="T:MyDatastructure.PriorityQueue.SimpleBinaryHeap`1">
             <summary>
-            This will be the simplest Binary Heap imaginable.
+            This will be the simplest Binary Heap imaginable, Min or Max.
             0 index will be a dummy
             Null is not a accepted value.
+            </summary>
+        </member>
+        <member name="F:MyDatastructure.PriorityQueue.SimpleBinaryHeap`1.AscendingOrder">
+            <summary>
+            A boolean to indicated the ordering.
             </summary>
         </member>
         <member name="F:MyDatastructure.PriorityQueue.SimpleBinaryHeap`1.HeapArray">
@@ -90,9 +120,21 @@
             </summary>
             <throw>
             InvalidOperationException is the heap is empty when
-            trying to remove elements. 
+            trying to remove elements.
             </throw>
             <returns></returns>
+        </member>
+        <member name="M:MyDatastructure.PriorityQueue.SimpleBinaryHeap`1.Compare(`0,`0)">
+            <summary>
+            Take in account into the settings of the heap to compare the
+            element.
+            <code>
+            a.CompareTo(b) if ascending
+            - a.CompareTo(b) if descending.
+            </code>
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
         </member>
         <member name="M:MyDatastructure.PriorityQueue.SimpleBinaryHeap`1.GetParentIndex(System.Int32)">
              <summary>
@@ -100,6 +142,45 @@
              </summary>
              <param name="arg"></param>
              <returns></returns>
+        </member>
+        <member name="F:MyDatastructure.PriorityQueue.BNode`1.LeftChild">
+            <summary>
+            Visiting Children at that level. 
+            </summary>
+        </member>
+        <member name="F:MyDatastructure.PriorityQueue.BNode`1.RightChild">
+            <summary>
+            Go down in the level of the Binomial Tree. 
+            </summary>
+        </member>
+        <member name="F:MyDatastructure.PriorityQueue.HatinaryTree`1.Root">
+            <summary>
+            Root of an ordinary binary tree. 
+            </summary>
+        </member>
+        <member name="F:MyDatastructure.PriorityQueue.HatinaryTree`1.Hat">
+            <summary>
+            The smallest element, top node of the binomial tree. 
+            </summary>
+        </member>
+        <member name="F:MyDatastructure.PriorityQueue.HatinaryTree`1.Rank">
+            <summary>
+            Represents the rank of the binomial tree. 
+            </summary>
+        </member>
+        <member name="M:MyDatastructure.PriorityQueue.HatinaryTree`1.#ctor(`0)">
+            <summary>
+            Construct B_0 Binomial tree. 
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:MyDatastructure.PriorityQueue.HatinaryTree`1.Merger(MyDatastructure.PriorityQueue.HatinaryTree{`0})">
+            <summary>
+            Merging 2 tree with the same rank
+            <exception>
+            Can not merge tree with 2 different rank.
+            </exception>
+            </summary>
         </member>
         <member name="T:MyDatastructure.PriorityQ.IPriorityQ`1">
             <summary>
@@ -384,6 +465,33 @@
             <summary>
             This class takes into the the position of the element in the array into account.
             </summary>
+        </member>
+        <member name="T:MyDatastructure.Sorting.TopAndBottomSort`1">
+            <summary>
+            A better version of Top K sort, it find the top and bottom N-k, k element 
+            from a list of comparable, it will also remember the min and the max too, 
+            on average, close to O(N log(K)) performace. 
+            
+            It will not modified the original structure. 
+            </summary>
+        </member>
+        <member name="F:MyDatastructure.Sorting.TopAndBottomSort`1.MiddleBody">
+            <summary>
+            All elements less than the K th max element and 
+            larger than the Kth element. 
+            </summary>
+        </member>
+        <member name="M:MyDatastructure.Sorting.TopAndBottomSort`1.#ctor(System.Int32,`0[])">
+            <summary>
+            Only Support K, on number, symmetric. 
+            It will not modify the array. 
+            </summary>
+            <param name="K">
+            The number of top and bottom you want from the data set. 
+            </param>
+            <param name="arr">
+            The random number of comparable you prepared.   
+            </param>
         </member>
         <member name="T:MyDatastructure.UnionFind.ArrayDisjointSet`1">
             <summary>

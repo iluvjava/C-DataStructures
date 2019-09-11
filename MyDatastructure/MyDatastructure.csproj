@@ -8,14 +8,14 @@
     <OldToolsVersion>15.0</OldToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\Administrator\source\repos\FunWith-API-HTTP-HTML-and-C-\My SeeSharp Library Attempt\MyDatastructure\MyDatastructure.xml</DocumentationFile>
+    <DocumentationFile>MyDatastructure.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Graph\**" />
     <Compile Remove="Sorting\MultiHybridStableComparer\**" />
+    <EmbeddedResource Remove="Graph\**" />
     <EmbeddedResource Remove="Sorting\MultiHybridStableComparer\**" />
+    <None Remove="Graph\**" />
     <None Remove="Sorting\MultiHybridStableComparer\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Graph\" />
   </ItemGroup>
 </Project>
