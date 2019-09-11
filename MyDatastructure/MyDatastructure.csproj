@@ -8,11 +8,7 @@
     <OldToolsVersion>15.0</OldToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-<<<<<<< HEAD
     <DocumentationFile>MyDatastructure.xml</DocumentationFile>
-=======
-    <DocumentationFile>./MyDatastructure.xml</DocumentationFile>
->>>>>>> af999740735edf53ca575f9a40938f4cc0b40556
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Graph\**" />

@@ -43,6 +43,14 @@ namespace MyDatastructure.Sorting
             {
                 throw new Exception();
             }
+            UnoderedData = arr; 
+        }
+
+        /// <summary>
+        /// Comput all things and add then to the field of the class. 
+        /// </summary>
+        public void Compute()
+        {
 
         }
 
