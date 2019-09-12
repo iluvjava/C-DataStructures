@@ -40,14 +40,27 @@ hat, representing the **smallest element** on the top of the Binomial Tree.
         The larger hat node's right connects to the inner binary tree with 
     the larger hatnode, left is the other binary tree. 
     ```
- - This codes will enforce the Binomial Invariant.
- - Uses the symmetry of the operation:
+  - This codes will enforce the Binomial Invariant.
+  - Uses the symmetry of the operation:
     ```
     if this.hatnode.value < that.hatnode.value
      => this.merge(that) else that.merge(this) 
     ```
+	- The merging of process for 2 B0 tree seems to be different than the general case. 
+    - **NOETS** 12/09/2019
+      - The non static method for merging is obsoleted because of the reference concerns and 
+      immutability of the object. A static method is added for merging of the tree instead. 
+	  - The merging process is a communtative operation, which means that a.Merge(b) == b.merge(a), 
+      it creates a reference to the new tree too.  
+
+- ### Test Cases
 ### The Node
-- The node is just an ordinary Binary Tree Node. 
+- The node is just an ordinary Binary Tree Node with left and right children. 
 
 ### The Heap
-- It's an array of trees. 
+- What is has: 
+  - An Array of Hatinary tree, forest, in order: [B_0, B_1, B_2... B_N]
+- What it does: 
+  - Merge, Add, RemoveMin
+  - Merging: 
+    - It's simliar to binary addition, the codes is in the Weiss book on page 260. 
