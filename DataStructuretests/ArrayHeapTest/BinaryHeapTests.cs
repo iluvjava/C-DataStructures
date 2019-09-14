@@ -34,6 +34,22 @@ namespace DataStructureTests.ArrayHeapTest
             }
         }
 
+        /// <summary>
+        /// Testing using a reference data structue and unique randomized double arrray. 
+        /// </summary>
+        /// <param name="size"></param>
+        /// <param name="repetition"></param>
+        /// <param name="type"></param>
+        public void BinaryHeapSuperFancyTest
+            (
+                int size, 
+                int repetition, 
+                PriorityQImplementations type = PriorityQImplementations.SimpleBinaryHeap
+            )
+        {
+
+        }
+
         [Test]
         /// <summary>
         /// Null cannot be added to the queue at all. 
@@ -193,8 +209,9 @@ namespace DataStructureTests.ArrayHeapTest
         [TestCase(9999999, 10)]
         public static void QuickMedianEfficiency(int size, int repetition)
         {
+            int k = size / 20 + 1; 
             WriteLine
-                ("Testing the speed for looking for median in a ranmized " +
+                ($"Testing the speed for looking for top {k} in a ranmized " +
                 "double array; using Top K Sort.");
             WriteLine($"Using Sorted set to look for it, array size: " +
                 $"{size}, repeat {repetition} times.");
@@ -204,7 +221,7 @@ namespace DataStructureTests.ArrayHeapTest
                 MyStopwatch msw = new MyStopwatch();
                 for (int i = repetition; --i >= 0;)
                 {
-                    TimedTopKSort(size, size / 2 + 1, msw, false);
+                    TimedTopKSort(size, k, msw, false);
                 }
                 WriteLine("Done! Here is that speed data: ");
                 WriteLine($"The average time took is: " +
@@ -217,7 +234,7 @@ namespace DataStructureTests.ArrayHeapTest
                 MyStopwatch msw = new MyStopwatch();
                 for (int i = repetition; --i >= 0;)
                 {
-                    TimedTopKSort(size, size / 2 + 1, msw, true);
+                    TimedTopKSort(size, k, msw, true);
                 }
                 WriteLine("Done! Here is that speed data: ");
                 WriteLine($"The average time took is: " +
@@ -227,8 +244,8 @@ namespace DataStructureTests.ArrayHeapTest
             }
         }
 
-        public static IPriorityQ<T> GetInstance<T>(PriorityQImplementations type)
-            where T : IComparable<T>
+        public static IPriorityQ<T> GetInstance<T>
+            (PriorityQImplementations type)where T : IComparable<T>
         {
             switch (type)
             {

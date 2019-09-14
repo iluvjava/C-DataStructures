@@ -73,7 +73,7 @@ namespace MyDatastructure.Sorting
             if (o is EquestriaCreatures)
             {
                 EquestriaCreatures temp = o as EquestriaCreatures;
-                if (Age == this.Age
+                if (Age == temp.Age
                     && Name.Equals(temp.Name)
                     && CreatureSpecies == temp.CreatureSpecies)
                     return true;
