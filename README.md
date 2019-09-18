@@ -52,6 +52,13 @@ hat, representing the **smallest element** on the top of the Binomial Tree.
       immutability of the object. A static method is added for merging of the tree instead. 
 	  - The merging process is a communtative operation, which means that a.Merge(b) == b.merge(a), 
       it creates a reference to the new tree too.  
+- ### Expand
+  - Remove the hat of the Htree (Root of Btree), and add all its children in order into an array,
+    thi method will be used for remove min of the heap. 
+  - The rank of the tree is equaled to its index in the returned array. 
+  - **Null is returned if the given tree is Rank 0**
+  - Tranversing down the left side of the tree, adding the traversing node as the hat of the new 
+  tree and adding the reference to the right of the node as the root of the new HTree. 
 
 - ### Test Cases
 ### The Node
@@ -60,6 +67,7 @@ hat, representing the **smallest element** on the top of the Binomial Tree.
 ### The Heap
 - What is has: 
   - An Array of Hatinary tree, forest, in order: [B_0, B_1, B_2... B_N]
+  - The rank of the Binomial tree is equaled to the index it is at. 
 - What it does: 
   - Merge, Add, RemoveMin
   - Merging: 

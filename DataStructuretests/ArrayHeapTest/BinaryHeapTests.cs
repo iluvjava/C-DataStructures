@@ -254,7 +254,6 @@ namespace DataStructureTests.ArrayHeapTest
                 case PriorityQImplementations.FancierBinaryHeap:
                     return new FancierBinaryHeap<T>();
             }
-
             return null;
         }
 

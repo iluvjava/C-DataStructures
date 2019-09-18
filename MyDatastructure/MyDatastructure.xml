@@ -145,9 +145,26 @@
         </member>
         <member name="T:MyDatastructure.PriorityQueue.BinomialHeap`1">
             <summary>
-            
+            This is the major class for the Binomial heap. 
+            - it has a forest of hatinary tree in it. 
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:MyDatastructure.PriorityQueue.BinomialHeap`1.Forest">
+            <summary>
+            Array of Hatinary tree. 
+            </summary>
+        </member>
+        <member name="P:MyDatastructure.PriorityQueue.BinomialHeap`1.Size">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MyDatastructure.PriorityQueue.BinomialHeap`1.MergeHeaps(MyDatastructure.PriorityQueue.BinomialHeap{`0})">
+            <summary>
+            Merges the rhs(righthandside) of the tree, the rhs will becompe an empty and unusable 
+            heap after the merge, the referece "this" will be come the new tree. 
+            </summary>
         </member>
         <member name="P:MyDatastructure.PriorityQueue.BNode`1.LeftChild">
             <summary>
@@ -176,6 +193,7 @@
         <member name="T:MyDatastructure.PriorityQueue.HatinaryTree`1">
             <summary>
             A representation of the abstract Binomial tree. 
+            ! Cannot accept null element. 
             </summary>
             <typeparam name="T"></typeparam>
         </member>
@@ -197,8 +215,14 @@
         <member name="M:MyDatastructure.PriorityQueue.HatinaryTree`1.#ctor(`0)">
             <summary>
             Construct B_0 Binomial tree.
+            ! : Cannot put null into it. 
             </summary>
-            <param name="data"></param>
+            <param name="data">
+            Type T data, cannot be null. 
+            </param>
+            <exception cref="T:MyDatastructure.InvalidArgumentException">
+            data is null. 
+            </exception>
         </member>
         <member name="M:MyDatastructure.PriorityQueue.HatinaryTree`1.#ctor">
             <summary>
@@ -217,11 +241,18 @@
         </member>
         <member name="M:MyDatastructure.PriorityQueue.HatinaryTree`1.Merge``1(MyDatastructure.PriorityQueue.HatinaryTree{``0},MyDatastructure.PriorityQueue.HatinaryTree{``0})">
             <summary>
-            
+            Extenstion method, Merge. 
             </summary>
             <typeparam name="R"></typeparam>
             <param name="tis"></param>
             <param name="that"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyDatastructure.PriorityQueue.HatinaryTree`1.Expand">
+            <summary>
+            Method will remove the root nodes of the tree and return 
+            a new array of trees for merging in the heap. 
+            </summary>
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:MyDatastructure.PriorityQueue.HatinaryTree`1.ToString" -->
