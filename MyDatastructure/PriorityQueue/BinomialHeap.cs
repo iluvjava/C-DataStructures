@@ -22,26 +22,51 @@ namespace MyDatastructure.PriorityQueue
 
         public int Size => throw new NotImplementedException();
 
+        /// <summary>
+        /// Returns a bool representing if the element is presented in the queue.
+        /// </summary>
+        /// <param name="arg">
+        /// Type T arg, null will be false always.
+        /// </param>
+        /// <returns>
+        ///
+        /// </returns>
         public bool Contains(T arg)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Add an element to the queue
+        /// </summary>
+        /// <param name="arg"></param>
         public void Enqueue(T arg)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Returns a reference to the smallest element in the queue.
+        /// </summary>
+        /// <returns></returns>
         public T Peek()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Unsoported operation.
+        /// </summary>
+        /// <param name="arg"></param>
         public void Remove(T arg)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Remove the minimum element from the queue.
+        /// </summary>
+        /// <returns></returns>
         public T RemoveMin()
         {
             throw new NotImplementedException();
@@ -59,13 +84,13 @@ namespace MyDatastructure.PriorityQueue
     }
 
     /// <summary>
-    /// Binary Node. 
+    /// Binary Node.
     /// </summary>
     /// <typeparam name="T">Any Type</typeparam>
     public class BNode<T>
     {
         /// <summary>
-        /// Type T data ths is stored in the node. 
+        /// Type T data ths is stored in the node.
         /// </summary>
         public T Data { get; set; }
 
@@ -80,16 +105,16 @@ namespace MyDatastructure.PriorityQueue
         public BNode<T> RightChild { get; set; }
 
         /// <summary>
-        /// Construct a Binary Node, with data, left child and right child. 
+        /// Construct a Binary Node, with data, left child and right child.
         /// </summary>
         /// <param name="data">
         /// Nullable
         /// </param>
         /// <param name="l">
-        /// BNode of the same type. left child. 
+        /// BNode of the same type. left child.
         /// </param>
         /// <param name="r">
-        /// BNode of the same type, right child. 
+        /// BNode of the same type, right child.
         /// </param>
         public BNode(T data, BNode<T> l = null, BNode<T> r = null)
         {
@@ -180,6 +205,7 @@ namespace MyDatastructure.PriorityQueue
         protected HatinaryTree()
         {
         }
+
         /// <summary>
         /// Internal use only
         /// </summary>
@@ -187,7 +213,6 @@ namespace MyDatastructure.PriorityQueue
         {
             Hat = hat;
             Root = root;
-
         }
 
         // ! Passed Casual Testing
@@ -222,7 +247,7 @@ namespace MyDatastructure.PriorityQueue
             return MergedTree;
         }
 
-        // ! Haven't been tested yet!!! 
+        // ! Haven't been tested yet!!!
         /// <summary>
         /// Method will remove the root nodes of the tree and return
         /// a new array of trees for merging in the heap, with the size of rank.
@@ -230,15 +255,15 @@ namespace MyDatastructure.PriorityQueue
         ///  It will not modifiy the current tree. </para>
         /// </summary>
         /// <returns>
-        /// Null is returned in the current tree is rank 0. 
+        /// Null is returned in the current tree is rank 0.
         /// </returns>
         public HatinaryTree<T>[] Expand()
         {
-            if (Rank == 0) return null; 
+            if (Rank == 0) return null;
             var res = new HatinaryTree<T>[Rank];
             {
                 res[Rank - 1] = new HatinaryTree<T>(Hat.Data);
-                BNode<T> node = Root; // ! Reference pointer, for traversing the tree. 
+                BNode<T> node = Root; // ! Reference pointer, for traversing the tree.
                 for (int i = Rank - 2; i >= 0; i--)
                 {
                     res[i] = new HatinaryTree<T>
@@ -248,7 +273,7 @@ namespace MyDatastructure.PriorityQueue
                     node = node.LeftChild;
                 }
             }
-            return res;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+            return res;
         }
 
         /// <summary>

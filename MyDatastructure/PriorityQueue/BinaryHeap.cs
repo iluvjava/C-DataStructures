@@ -38,6 +38,14 @@ namespace MyDatastructure.PriorityQueue
         {
         }
 
+        /// <summary>
+        /// True if the element is in the heap. else, false. 
+        /// </summary>
+        /// <param name="arg">
+        /// An instance of type T. 
+        /// </param>
+        /// <returns>
+        /// </returns>
         public bool Contain(T arg)
         {
             return IndexMap.ContainsKey(arg);
@@ -46,7 +54,9 @@ namespace MyDatastructure.PriorityQueue
         /// <summary>
         /// you cannot add duplicated element to the heap.
         /// </summary>
-        /// <param name="arg"></param>
+        /// <param name="arg">
+        /// An non null instance of the type of T element. 
+        /// </param>
         public void Enqueue(T arg)
         {
             if (IsNull(arg))
@@ -93,8 +103,10 @@ namespace MyDatastructure.PriorityQueue
 
     /// <summary>
     /// This will be the simplest Binary Heap imaginable, Min or Max.
-    /// 0 index will be a dummy
-    /// Null is not a accepted value.
+    /// 0 index will be a dummy;
+    /// Null is not a accepted value;
+    /// Repeated elements are ok;
+    /// <para>Doesn't support remove and contain operations. </para>
     /// </summary>
     public class SimpleBinaryHeap<T> : IPriorityQ<T> where T : IComparable<T>
     {
@@ -102,7 +114,9 @@ namespace MyDatastructure.PriorityQueue
         /// A boolean to indicated the ordering.
         /// </summary>
         protected bool AscendingOrder = true;
-
+        /// <summary>
+        /// The number of total element in the array. 
+        /// </summary>
         protected int ElementCount = 0;
 
         /// <summary>
@@ -118,6 +132,12 @@ namespace MyDatastructure.PriorityQueue
             HeapArray = new T[32];
         }
 
+        /// <summary>
+        /// Instanciate an instance of Binary heap, a boolean to indicate prefered odering. 
+        /// </summary>
+        /// <param name="ascending">
+        /// True: Ascending order; False: Descending order. 
+        /// </param>
         public SimpleBinaryHeap(bool ascending) : this()
         {
             AscendingOrder = false;
@@ -154,6 +174,9 @@ namespace MyDatastructure.PriorityQueue
             }
         }
 
+        /// <summary>
+        /// Getter method for getting size of the heap. 
+        /// </summary>
         public int Size
         {
             get
@@ -162,6 +185,15 @@ namespace MyDatastructure.PriorityQueue
             }
         }
 
+        /// <summary>
+        /// Internal method for checking the reference of object is null or not. (Kinda uneccesary...)
+        /// </summary>
+        /// <param name="o">
+        /// Reference to any object. 
+        /// \</param>
+        /// <returns>
+        /// True if it's null. 
+        /// </returns>
         public static bool IsNull(object o)
         {
             return object.Equals(o, null);
@@ -170,8 +202,12 @@ namespace MyDatastructure.PriorityQueue
         /// <summary>
         /// Not supported for this class.
         /// </summary>
-        /// <param name="arg"></param>
-        /// <returns></returns>
+        /// <param name="arg">
+        /// Any instance of the type T. 
+        /// </param>
+        /// <returns>
+        /// True if it's in the queue, else false. 
+        /// </returns>
         public bool Contains(T arg)
         {
             throw new NotSupportedException();
@@ -180,7 +216,9 @@ namespace MyDatastructure.PriorityQueue
         /// <summary>
         /// add a new element into the queue.
         /// </summary>
-        /// <param name="arg"></param>
+        /// <param name="arg">
+        /// Non null instance of the type T. 
+        /// </param>
         public void Enqueue(T arg)
         {
             if (IsNull(arg))
@@ -191,6 +229,10 @@ namespace MyDatastructure.PriorityQueue
             ElementCount++;
         }
 
+        /// <summary>
+        /// Returns an reference to the smallest element in the queue. 
+        /// </summary>
+        /// <returns></returns>
         public T Peek()
         {
             return HeapArray[1]; // 0 element is the dummy node.
@@ -224,6 +266,9 @@ namespace MyDatastructure.PriorityQueue
             return res;
         }
 
+        /// <summary>
+        /// Internal method for resizing the heap array in the object. 
+        /// </summary>
         protected void AutomaticResize()
         {
             if (ElementCount + 1 == HeapArray.Length)
@@ -240,13 +285,26 @@ namespace MyDatastructure.PriorityQueue
         /// - a.CompareTo(b) if descending.
         /// </code>
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
+        /// <param name="a">
+        /// an element
+        /// </param>
+        /// <param name="b">
+        /// another element</param>
         protected int Compare(T a, T b)
         {
             return AscendingOrder ? a.CompareTo(b) : -a.CompareTo(b);
         }
 
+        /// <summary>
+        /// Given any index, it will return the index of where the first child of the element 
+        /// will be in. 
+        /// </summary>
+        /// <param name="arg">
+        /// index of the node you are currently looking at. 
+        /// </param>
+        /// <returns>
+        /// Index of it's left child; in the heap. 
+        /// </returns>
         protected int GetFirstChildIndex(int arg)
         {
             if (arg < 1)
@@ -255,10 +313,14 @@ namespace MyDatastructure.PriorityQueue
         }
 
         /// <summary>
-        ///
+        ///Return the index of where the parent of the given node is at. 
         /// </summary>
-        /// <param name="arg"></param>
-        /// <returns></returns>
+        /// <param name="arg">
+        /// Index of the node you are looking at. 
+        /// </param>
+        /// <returns>
+        /// The index of where to look for the parent node. 
+        /// </returns>
         protected int GetParentIndex(int arg)
         {
             if (arg <= 1)
@@ -268,11 +330,29 @@ namespace MyDatastructure.PriorityQueue
             return arg / 2;
         }
 
+        /// <summary>
+        /// Internal method, if either percolate the node up, or it percolate the element down. 
+        /// </summary>
+        /// <param name="arg">
+        /// The index of the element you want to percolate. 
+        /// </param>
+        /// <returns>
+        /// The index of where the element finally ended up. 
+        /// </returns>
         protected int Percolate(int arg)
         {
             return PercolateUp(PercolateDown(arg));
         }
 
+        /// <summary>
+        /// Percolate the element down and move the smallest children up to where the parent is at. 
+        /// </summary>
+        /// <param name="arg">
+        /// The index of the where the elenet you want to percolate down. 
+        /// </param>
+        /// <returns>
+        /// Where the index of the node finally ended up with. 
+        /// </returns>
         protected int PercolateDown(int arg)
         {
             int LeftChildIdx = GetFirstChildIndex(arg);
@@ -307,7 +387,17 @@ namespace MyDatastructure.PriorityQueue
             //No child
             return arg;
         }
-
+        
+        /// <summary>
+        /// Percolate the element up the heap, if it's smaller than the parent
+        /// <para>Internal use only. </para>
+        /// </summary>
+        /// <param name="arg">
+        /// Index of the element you want to percolate up. 
+        /// </param>
+        /// <returns>
+        /// The index where it finally ended up with. 
+        /// </returns>
         protected int PercolateUp(int arg)
         {
             if (arg == 1)
@@ -323,6 +413,15 @@ namespace MyDatastructure.PriorityQueue
             return arg;
         }
 
+        /// <summary>
+        /// Give index of 2 elements, it will swap those 2 elements in the heap array. 
+        /// </summary>
+        /// <param name="arg1">
+        /// First index. 
+        /// </param>
+        /// <param name="arg2">
+        /// Another index. 
+        /// </param>
         protected void Swap(int arg1, int arg2)
         {
             if (arg1 == arg2)

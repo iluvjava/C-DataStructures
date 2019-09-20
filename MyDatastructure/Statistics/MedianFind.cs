@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MyDatastructure.Statistics
 {
-    public class MedianFind
+    public class FindMedian<T> where T : IComparable<T>
     {
 
     }
