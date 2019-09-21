@@ -9,7 +9,10 @@ namespace MyDatastructure.PriorityQ
     /// </summary>
     public interface IPriorityQ<T>
     {
-        // Return the current size of the Queue. 
+        /// <summary>
+        /// Returned current size of the queue, if the queue allows repeating elements, then 
+        /// it returns the count of element including the repetition. 
+        /// </summary>
         int Size { get; }
 
         /// <summary>

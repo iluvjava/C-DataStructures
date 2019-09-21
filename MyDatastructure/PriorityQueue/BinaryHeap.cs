@@ -18,11 +18,20 @@ namespace MyDatastructure.PriorityQueue
         /// </summary>
         protected IMap<T, int> IndexMap;
 
+        /// <summary>
+        /// Create an Fancier Binary Min Heap. 
+        /// </summary>
         public FancierBinaryHeap() : base()
         {
             IndexMap = new SysDefaultMap<T, int>();
         }
 
+        /// <summary>
+        /// Creates a fancier binary heap, with the specified ordering of the elements. 
+        /// </summary>
+        /// <param name="asc">
+        /// True for min heap, false for max heap. 
+        /// </param>
         public FancierBinaryHeap(bool asc) : base(asc)
         {
             IndexMap = new SysDefaultMap<T, int>();
@@ -46,7 +55,7 @@ namespace MyDatastructure.PriorityQueue
         /// </param>
         /// <returns>
         /// </returns>
-        public bool Contain(T arg)
+        override public bool Contains(T arg)
         {
             return IndexMap.ContainsKey(arg);
         }
@@ -57,7 +66,7 @@ namespace MyDatastructure.PriorityQueue
         /// <param name="arg">
         /// An non null instance of the type of T element. 
         /// </param>
-        public void Enqueue(T arg)
+        override public void Enqueue(T arg)
         {
             if (IsNull(arg))
                 throw new InvalidArgumentException();
@@ -68,8 +77,13 @@ namespace MyDatastructure.PriorityQueue
             IndexMap[arg] = ElementCount + 1;
             base.Enqueue(arg);
         }
-
-        public void Remove(T arg)
+        /// <summary>
+        /// Remove an element of type T from thea queue. 
+        /// </summary>
+        /// <param name="arg">
+        /// An instance of the type T element. 
+        /// </param>
+        override public void Remove(T arg)
         {
             if (!IndexMap.ContainsKey(arg))
             {
@@ -82,16 +96,25 @@ namespace MyDatastructure.PriorityQueue
             Percolate(IndexOfRemove);
         }
 
-        public void RemoveMin()
+        /// <summary>
+        /// Remoe the minimum element from the heap. 
+        /// </summary>
+        override public T RemoveMin()
         {
             if (ElementCount == 0)
                 throw new InvalidOperationException();
             T Removed = Peek();
             base.RemoveMin();
             IndexMap.Remove(Removed);
+            return Removed;
         }
 
-        protected void Swap(int arg1, int arg2)
+        /// <summary>
+        /// Internal use, for swapping element in the array heap. 
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        new protected void Swap(int arg1, int arg2)
         {
             T a = HeapArray[arg1];
             T b = HeapArray[arg2];
@@ -107,6 +130,9 @@ namespace MyDatastructure.PriorityQueue
     /// Null is not a accepted value;
     /// Repeated elements are ok;
     /// <para>Doesn't support remove and contain operations. </para>
+    /// <para>
+    /// Virtual keywords are used for the public members in the class for easier extension. 
+    /// </para>
     /// </summary>
     public class SimpleBinaryHeap<T> : IPriorityQ<T> where T : IComparable<T>
     {
@@ -177,7 +203,7 @@ namespace MyDatastructure.PriorityQueue
         /// <summary>
         /// Getter method for getting size of the heap. 
         /// </summary>
-        public int Size
+        public virtual int Size
         {
             get
             {
@@ -208,7 +234,7 @@ namespace MyDatastructure.PriorityQueue
         /// <returns>
         /// True if it's in the queue, else false. 
         /// </returns>
-        public bool Contains(T arg)
+        public virtual bool Contains(T arg)
         {
             throw new NotSupportedException();
         }
@@ -219,7 +245,7 @@ namespace MyDatastructure.PriorityQueue
         /// <param name="arg">
         /// Non null instance of the type T. 
         /// </param>
-        public void Enqueue(T arg)
+        public virtual void Enqueue(T arg)
         {
             if (IsNull(arg))
                 throw new InvalidArgumentException();
@@ -233,7 +259,7 @@ namespace MyDatastructure.PriorityQueue
         /// Returns an reference to the smallest element in the queue. 
         /// </summary>
         /// <returns></returns>
-        public T Peek()
+        public virtual T Peek()
         {
             return HeapArray[1]; // 0 element is the dummy node.
         }
@@ -242,7 +268,7 @@ namespace MyDatastructure.PriorityQueue
         /// Not supported.
         /// </summary>
         /// <param name="arg"></param>
-        public void Remove(T arg)
+        public virtual void Remove(T arg)
         {
             throw new NotSupportedException();
         }
@@ -255,7 +281,7 @@ namespace MyDatastructure.PriorityQueue
         /// trying to remove elements.
         /// </throw>
         /// <returns></returns>
-        public T RemoveMin()
+        public virtual T RemoveMin()
         {
             if (ElementCount == 0)
                 throw new InvalidOperationException();
