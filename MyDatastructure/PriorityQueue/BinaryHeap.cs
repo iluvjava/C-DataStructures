@@ -10,7 +10,6 @@ namespace MyDatastructure.PriorityQueue
     /// , supports unique elements.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    [Obsolete("Never tested yet.")]
     public class FancierBinaryHeap<T> : SimpleBinaryHeap<T> where T : IComparable<T>
     {
         /// <summary>
@@ -166,7 +165,7 @@ namespace MyDatastructure.PriorityQueue
         /// </param>
         public SimpleBinaryHeap(bool ascending) : this()
         {
-            AscendingOrder = false;
+            AscendingOrder = ascending;
         }
 
         /// <summary>
@@ -176,9 +175,10 @@ namespace MyDatastructure.PriorityQueue
         /// It uses floyd build heap, good for partial sort.
         /// </remark>
         /// </summary>
-        /// <param name="list">
+        /// <param name="source">
         /// The list should not comtain null, it will blows up if it contains
         /// null.
+        /// </param>
         /// <param name="offset">
         /// Where you want to start add element from the array to the heap.
         /// Invalid argument will be set to 0.

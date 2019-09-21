@@ -30,7 +30,6 @@ namespace DataStructureTests.ArrayHeapTest
         /// Construct a basic B2 out of this shit. 
         /// </summary>
         /// <returns></returns>
-
         public static HatinaryTree<int> ConstructBasicIntB2()
         {
             var B0 = new HatinaryTree<int>(65);
