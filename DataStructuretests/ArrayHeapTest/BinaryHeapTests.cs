@@ -265,7 +265,69 @@ namespace DataStructureTests.ArrayHeapTest
         }
 
 
+        /// <summary>
+        /// Method test the basic functionalities of remove and contains method in the fancier 
+        /// binary heap. 
+        /// </summary>
+        /// <param name="size">
+        /// The size of array meant to test. 
+        /// </param>
+        [TestCase]
+        [TestCase(1000)]
+        public void TestFancierBinaryHeap(int size = 100)
+        {
+            IPriorityQ<int> q = new FancierBinaryHeap<int>();
+            WriteLine("Flushing in a array of randomized unique integers."); 
+            var RandomizedArray = GetRandomizedIntSequence(size);
+            for (int i = 0; i < size; q.Enqueue(RandomizedArray[i]), i++) ;
+            WriteLine("Confirming all integers are there.");
+            for (int i = 1; i <= size; i++)
+                Assert.IsTrue(q.Contains(i));
+            WriteLine("Removing all the odd integers there.");
+            for (int i = 1; i <= size; i += 2)
+            {
+                q.Remove(i);
+                Assert.IsTrue(!q.Contains(i));
+            }
+            WriteLine("Assert all remaining even elements are properly odered");
+            for (int i = 2; i <= size; i += 2)
+                Assert.IsTrue(q.RemoveMin() == i);
+        }
 
+
+        /// <summary>
+        /// Test if correct error is thrown when expected. 
+        /// <para>
+        /// InvalidArgumentException when attempting to add repeated elements. 
+        /// </para>
+        /// <para>
+        /// Cannot add null element to the queue. 
+        /// </para>
+        /// <para>
+        /// Cannot remove min when the queue is empty. 
+        /// </para>
+        /// </summary>
+        [Test]
+        public void TestFancierBinaryHeapExpectedExceptions()
+        {
+            IPriorityQ<int> q = new FancierBinaryHeap<int>();
+            TestDelegate test = () =>
+            {
+                q.RemoveMin();
+            };
+            AssertThrow<InvalidOperationException>(test);
+            q.Enqueue(1);
+            test = () => {
+                q.Enqueue(1);
+            };
+            AssertThrow<InvalidArgumentException>(test);
+            IPriorityQ<string> qq = new FancierBinaryHeap<string>();
+            test = () =>
+            {
+                qq.Enqueue(null);
+            };
+            AssertThrow<InvalidArgumentException>(test);
+        }
 
     }
 }

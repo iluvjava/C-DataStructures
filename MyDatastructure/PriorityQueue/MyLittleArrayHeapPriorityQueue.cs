@@ -109,8 +109,6 @@ namespace MyDatastructure
         {
         }
 
-
-
         /// <summary>
         /// A helper methods that swaps any array.
         /// </summary>

@@ -20,10 +20,15 @@ namespace DataStructureTests.GeneralTestingTools
         }
 
         /// <summary>
-        /// Return a randomized sequence starting with 1, and end with len.
+        /// Return a randomized sequence starting with 1, and end with len, 
+        /// with all integers in between, no repetitions. 
         /// </summary>
-        /// <param name="len"></param>
-        /// <returns></returns>
+        /// <param name="len">
+        /// The number of integers you want. 
+        /// </param>
+        /// <returns>
+        /// A randomized array containing all the integers from 1 to len, unique. 
+        /// </returns>
         public static int[] GetRandomizedIntSequence(int len)
         {
             if (len < 1) return new int[] { };

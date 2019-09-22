@@ -7,7 +7,10 @@ namespace MyDatastructure.PriorityQueue
 {
     /// <summary>
     /// Simple binary heap that uses a hash map to keep track of the element
-    /// , supports unique elements.
+    /// <para>
+    /// Doesn't support repeating element in the heap.
+    /// </para>
+    ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class FancierBinaryHeap<T> : SimpleBinaryHeap<T> where T : IComparable<T>
@@ -18,7 +21,7 @@ namespace MyDatastructure.PriorityQueue
         protected IMap<T, int> IndexMap;
 
         /// <summary>
-        /// Create an Fancier Binary Min Heap. 
+        /// Create an Fancier Binary Min Heap.
         /// </summary>
         public FancierBinaryHeap() : base()
         {
@@ -26,10 +29,10 @@ namespace MyDatastructure.PriorityQueue
         }
 
         /// <summary>
-        /// Creates a fancier binary heap, with the specified ordering of the elements. 
+        /// Creates a fancier binary heap, with the specified ordering of the elements.
         /// </summary>
         /// <param name="asc">
-        /// True for min heap, false for max heap. 
+        /// True for min heap, false for max heap.
         /// </param>
         public FancierBinaryHeap(bool asc) : base(asc)
         {
@@ -47,10 +50,10 @@ namespace MyDatastructure.PriorityQueue
         }
 
         /// <summary>
-        /// True if the element is in the heap. else, false. 
+        /// True if the element is in the heap. else, false.
         /// </summary>
         /// <param name="arg">
-        /// An instance of type T. 
+        /// An instance of type T.
         /// </param>
         /// <returns>
         /// </returns>
@@ -63,8 +66,11 @@ namespace MyDatastructure.PriorityQueue
         /// you cannot add duplicated element to the heap.
         /// </summary>
         /// <param name="arg">
-        /// An non null instance of the type of T element. 
+        /// An non null instance of the type of T element.
         /// </param>
+        /// <exception cref="MyDatastructure.InvalidArgumentException">
+        /// Thrown when attempting to enqueue null element or repeated element.
+        /// </exception>
         override public void Enqueue(T arg)
         {
             if (IsNull(arg))
@@ -76,17 +82,24 @@ namespace MyDatastructure.PriorityQueue
             IndexMap[arg] = ElementCount + 1;
             base.Enqueue(arg);
         }
+
         /// <summary>
-        /// Remove an element of type T from thea queue. 
+        /// Remove an element of type T from thea queue; null is ok.
+        /// <para>
+        /// If element is not there, it will just ignore it and continues.
+        /// </para>
+        /// <para>
+        /// If the queue is empty, then it will just skip it.
+        /// </para>
         /// </summary>
         /// <param name="arg">
-        /// An instance of the type T element. 
+        /// An instance of the type T element.
         /// </param>
         override public void Remove(T arg)
         {
             if (!IndexMap.ContainsKey(arg))
             {
-                throw new InvalidArgumentException();
+                return;
             }
             int IndexOfRemove = IndexMap[arg];
             Swap(IndexOfRemove, ElementCount);
@@ -96,8 +109,14 @@ namespace MyDatastructure.PriorityQueue
         }
 
         /// <summary>
-        /// Remoe the minimum element from the heap. 
+        /// Remoe the minimum element from the heap.
         /// </summary>
+        /// <returns>
+        /// The min element in the queue.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown when trying to RemoveMin when the queue is empty.
+        /// </exception>
         override public T RemoveMin()
         {
             if (ElementCount == 0)
@@ -109,11 +128,11 @@ namespace MyDatastructure.PriorityQueue
         }
 
         /// <summary>
-        /// Internal use, for swapping element in the array heap. 
+        /// Internal use, for swapping element in the array heap.
         /// </summary>
         /// <param name="arg1"></param>
         /// <param name="arg2"></param>
-        new protected void Swap(int arg1, int arg2)
+        override protected void Swap(int arg1, int arg2)
         {
             T a = HeapArray[arg1];
             T b = HeapArray[arg2];
@@ -130,7 +149,7 @@ namespace MyDatastructure.PriorityQueue
     /// Repeated elements are ok;
     /// <para>Doesn't support remove and contain operations. </para>
     /// <para>
-    /// Virtual keywords are used for the public members in the class for easier extension. 
+    /// Virtual keywords are used for the public members in the class for easier extension.
     /// </para>
     /// </summary>
     public class SimpleBinaryHeap<T> : IPriorityQ<T> where T : IComparable<T>
@@ -139,8 +158,9 @@ namespace MyDatastructure.PriorityQueue
         /// A boolean to indicated the ordering.
         /// </summary>
         protected bool AscendingOrder = true;
+
         /// <summary>
-        /// The number of total element in the array. 
+        /// The number of total element in the array.
         /// </summary>
         protected int ElementCount = 0;
 
@@ -148,6 +168,17 @@ namespace MyDatastructure.PriorityQueue
         /// index 0 is dummy.
         /// </summary>
         protected T[] HeapArray;
+
+        /// <summary>
+        /// Getter method for getting size of the heap.
+        /// </summary>
+        public virtual int Size
+        {
+            get
+            {
+                return ElementCount;
+            }
+        }
 
         /// <summary>
         /// Get an instance of the Binary Heap.
@@ -158,10 +189,10 @@ namespace MyDatastructure.PriorityQueue
         }
 
         /// <summary>
-        /// Instanciate an instance of Binary heap, a boolean to indicate prefered odering. 
+        /// Instanciate an instance of Binary heap, a boolean to indicate prefered odering.
         /// </summary>
         /// <param name="ascending">
-        /// True: Ascending order; False: Descending order. 
+        /// True: Ascending order; False: Descending order.
         /// </param>
         public SimpleBinaryHeap(bool ascending) : this()
         {
@@ -201,24 +232,13 @@ namespace MyDatastructure.PriorityQueue
         }
 
         /// <summary>
-        /// Getter method for getting size of the heap. 
-        /// </summary>
-        public virtual int Size
-        {
-            get
-            {
-                return ElementCount;
-            }
-        }
-
-        /// <summary>
         /// Internal method for checking the reference of object is null or not. (Kinda uneccesary...)
         /// </summary>
         /// <param name="o">
-        /// Reference to any object. 
+        /// Reference to any object.
         /// \</param>
         /// <returns>
-        /// True if it's null. 
+        /// True if it's null.
         /// </returns>
         public static bool IsNull(object o)
         {
@@ -229,10 +249,10 @@ namespace MyDatastructure.PriorityQueue
         /// Not supported for this class.
         /// </summary>
         /// <param name="arg">
-        /// Any instance of the type T. 
+        /// Any instance of the type T.
         /// </param>
         /// <returns>
-        /// True if it's in the queue, else false. 
+        /// True if it's in the queue, else false.
         /// </returns>
         public virtual bool Contains(T arg)
         {
@@ -243,7 +263,7 @@ namespace MyDatastructure.PriorityQueue
         /// add a new element into the queue.
         /// </summary>
         /// <param name="arg">
-        /// Non null instance of the type T. 
+        /// Non null instance of the type T.
         /// </param>
         public virtual void Enqueue(T arg)
         {
@@ -256,7 +276,7 @@ namespace MyDatastructure.PriorityQueue
         }
 
         /// <summary>
-        /// Returns an reference to the smallest element in the queue. 
+        /// Returns an reference to the smallest element in the queue.
         /// </summary>
         /// <returns></returns>
         public virtual T Peek()
@@ -293,7 +313,7 @@ namespace MyDatastructure.PriorityQueue
         }
 
         /// <summary>
-        /// Internal method for resizing the heap array in the object. 
+        /// Internal method for resizing the heap array in the object.
         /// </summary>
         protected void AutomaticResize()
         {
@@ -322,14 +342,14 @@ namespace MyDatastructure.PriorityQueue
         }
 
         /// <summary>
-        /// Given any index, it will return the index of where the first child of the element 
-        /// will be in. 
+        /// Given any index, it will return the index of where the first child of the element
+        /// will be in.
         /// </summary>
         /// <param name="arg">
-        /// index of the node you are currently looking at. 
+        /// index of the node you are currently looking at.
         /// </param>
         /// <returns>
-        /// Index of it's left child; in the heap. 
+        /// Index of it's left child; in the heap.
         /// </returns>
         protected int GetFirstChildIndex(int arg)
         {
@@ -339,13 +359,13 @@ namespace MyDatastructure.PriorityQueue
         }
 
         /// <summary>
-        ///Return the index of where the parent of the given node is at. 
+        ///Return the index of where the parent of the given node is at.
         /// </summary>
         /// <param name="arg">
-        /// Index of the node you are looking at. 
+        /// Index of the node you are looking at.
         /// </param>
         /// <returns>
-        /// The index of where to look for the parent node. 
+        /// The index of where to look for the parent node.
         /// </returns>
         protected int GetParentIndex(int arg)
         {
@@ -357,13 +377,13 @@ namespace MyDatastructure.PriorityQueue
         }
 
         /// <summary>
-        /// Internal method, if either percolate the node up, or it percolate the element down. 
+        /// Internal method, if either percolate the node up, or it percolate the element down.
         /// </summary>
         /// <param name="arg">
-        /// The index of the element you want to percolate. 
+        /// The index of the element you want to percolate.
         /// </param>
         /// <returns>
-        /// The index of where the element finally ended up. 
+        /// The index of where the element finally ended up.
         /// </returns>
         protected int Percolate(int arg)
         {
@@ -371,13 +391,13 @@ namespace MyDatastructure.PriorityQueue
         }
 
         /// <summary>
-        /// Percolate the element down and move the smallest children up to where the parent is at. 
+        /// Percolate the element down and move the smallest children up to where the parent is at.
         /// </summary>
         /// <param name="arg">
-        /// The index of the where the elenet you want to percolate down. 
+        /// The index of the where the elenet you want to percolate down.
         /// </param>
         /// <returns>
-        /// Where the index of the node finally ended up with. 
+        /// Where the index of the node finally ended up with.
         /// </returns>
         protected int PercolateDown(int arg)
         {
@@ -413,16 +433,16 @@ namespace MyDatastructure.PriorityQueue
             //No child
             return arg;
         }
-        
+
         /// <summary>
         /// Percolate the element up the heap, if it's smaller than the parent
         /// <para>Internal use only. </para>
         /// </summary>
         /// <param name="arg">
-        /// Index of the element you want to percolate up. 
+        /// Index of the element you want to percolate up.
         /// </param>
         /// <returns>
-        /// The index where it finally ended up with. 
+        /// The index where it finally ended up with.
         /// </returns>
         protected int PercolateUp(int arg)
         {
@@ -440,15 +460,15 @@ namespace MyDatastructure.PriorityQueue
         }
 
         /// <summary>
-        /// Give index of 2 elements, it will swap those 2 elements in the heap array. 
+        /// Give index of 2 elements, it will swap those 2 elements in the heap array.
         /// </summary>
         /// <param name="arg1">
-        /// First index. 
+        /// First index.
         /// </param>
         /// <param name="arg2">
-        /// Another index. 
+        /// Another index.
         /// </param>
-        protected void Swap(int arg1, int arg2)
+        protected virtual void Swap(int arg1, int arg2)
         {
             if (arg1 == arg2)
                 return;
