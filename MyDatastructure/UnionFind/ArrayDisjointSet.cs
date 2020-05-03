@@ -6,15 +6,31 @@ namespace MyDatastructure.UnionFind
 {
 
     /// <summary>
-    /// Disjoint set implemented by forest in array. 
+    /// Disjoint set implemented by forest of reverse tree in the array. 
     /// </summary>
     public class ArrayDisjointSet<T> : IDisjointSet<T>
     {
+        /// <summary>
+        /// The object and their perspective index in the array. 
+        /// </summary>
         protected IMap<T, int> IndexMap;
+        /// <summary>
+        /// Storing the forest reverse tree, index 0 is dummy. 
+        /// </summary>
         protected int[] Forest; // more than one inverse tree. index 0 is a dummy. 
+        /// <summary>
+        /// Total number of elements. 
+        /// </summary>
         protected int Size;
 
+        /// <summary>
+        /// The number of distinct sets there are after merging. 
+        /// </summary>
+        protected int disjointset_count;
 
+        /// <summary>
+        /// Create an instance of ArrayDisjointset.
+        /// </summary>
         public ArrayDisjointSet()
         {
             IndexMap = new SysDefaultMap<T, int>();
@@ -39,8 +55,19 @@ namespace MyDatastructure.UnionFind
             Forest[Size + 1] = 0;
             IndexMap[a] = Size + 1;
             Size++;
+
+            disjointset_count++;
         }
 
+        /// <summary>
+        ///     Find a set this object belongs to. 
+        /// </summary>
+        /// <param name="a">
+        ///     The set object. 
+        /// </param>
+        /// <returns>
+        ///     An integer representative of the set it is belonged to. 
+        /// </returns>
         public int FindSet(T a)
         {
             if (!IndexMap.ContainsKey(a))
@@ -50,7 +77,11 @@ namespace MyDatastructure.UnionFind
             return FindSet(IndexMap[a]);
         }
 
-
+        /// <summary>
+        /// Internally used. 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         protected int FindSet(int index)
         {
             //We are at root.
@@ -81,7 +112,7 @@ namespace MyDatastructure.UnionFind
         }
 
         /// <summary>
-        /// 
+        /// Let these 2 element belongs to the same set. 
         /// </summary>
         /// <param name="a"></param>
         /// <param name="b"></param>
@@ -101,16 +132,20 @@ namespace MyDatastructure.UnionFind
             {
                 return;
             }
-            int setArank = - Forest[rootindexA];
-            int setBrank = - Forest[rootindexB];
+            int setArank = -Forest[rootindexA];
+            int setBrank = -Forest[rootindexB];
             if (setArank == setBrank)
             {
                 if (rootindexA < rootindexB)
+                {
                     Forest[rootindexB] = rootindexA;
+                    Forest[rootindexA]--;
+                }
                 else
+                {
                     Forest[rootindexA] = rootindexB;
-
-                Forest[rootindexA]--;
+                    Forest[rootindexB]--;
+                }
                 return;
             }
             if (setArank > setBrank)
@@ -119,8 +154,14 @@ namespace MyDatastructure.UnionFind
                 return;
             }
             Forest[rootindexA] = rootindexB;
+
+
+            disjointset_count--; // UNDONE: regression notes. 
         }
 
+        /// <summary>
+        /// Used internally for resizing the array. 
+        /// </summary>
         protected void AutoMaticResize()
         {
             if (Size == Forest.Length - 1)
@@ -131,10 +172,19 @@ namespace MyDatastructure.UnionFind
             }
         }
 
+        /// <summary>
+        /// Get the integers representing the set where element a is in. 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns>
+        /// Integer. 
+        /// </returns>
         public int GetRepresentative(T a)
         {
             return FindSet(a);
         }
+
+
     }
 }
 

@@ -5,6 +5,12 @@ using System.Text;
 namespace MyDatastructure.UnionFind
 {   
 
+    /// <summary>
+    /// Interface fo the data structure disjointset. 
+    /// </summary>
+    /// <typeparam name="T">
+    /// Any consistent type. 
+    /// </typeparam>
     public interface IDisjointSet<T>
     {
         /// <summary>

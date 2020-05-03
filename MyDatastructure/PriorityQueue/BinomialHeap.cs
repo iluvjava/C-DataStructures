@@ -252,7 +252,12 @@ namespace MyDatastructure.PriorityQueue
         /// Method will remove the root nodes of the tree and return
         /// a new array of trees for merging in the heap, with the size of rank.
         /// <para>
-        ///  It will not modifiy the current tree. </para>
+        ///  It will not modifiy the current tree. 
+        ///  </para>
+        ///  
+        /// <para>
+        /// The size of the returned array equals to the rank of the tree. 
+        /// </para>
         /// </summary>
         /// <returns>
         /// Null is returned in the current tree is rank 0.
@@ -290,7 +295,7 @@ namespace MyDatastructure.PriorityQueue
 
         /// <summary>
         /// <code>
-        /// \{hat:&lt;hatdata&gt,[rank]\|&lt;Thebinarytree &gt;\}
+        /// \{hat:&lt;hatdata&gt;[rank]\|&lt;Thebinarytree &gt;\}
         /// </code>
         /// </summary>
         /// <returns></returns>
